@@ -18,8 +18,6 @@ def calculate_fuel(mass):
 
 
 def main():
-    print(os.path.dirname(os.path.realpath(__file__)))
-
     with open('{0}/input.txt'.format(os.path.dirname(os.path.realpath(__file__)))) as f:
         module_masses = f.read().splitlines() 
 

@@ -18,8 +18,6 @@ What is the sum of the fuel requirements for all of the modules on your spacecra
 import os
 
 def main():
-    print(os.path.dirname(os.path.realpath(__file__)))
-
     with open('{0}/input.txt'.format(os.path.dirname(os.path.realpath(__file__)))) as f:
         module_masses = f.read().splitlines() 
 
