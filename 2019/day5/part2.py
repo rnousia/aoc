@@ -50,7 +50,7 @@ def parse_instructions(opcode):
         opcode = int(str(opcode)[-2:])
     return opcode, modes
 
-def run_computer(sequence):
+def run_computer(sequence, computer_options={}):
     integers = sequence.copy()
     index = 0
     opcode, modes = parse_instructions(integers[index])
@@ -69,10 +69,16 @@ def run_computer(sequence):
             index += 4
 
         elif opcode == 3:
-            integers[first_param] = int(input("Enter integer: "))
+            if computer_options.get('input_values', None):
+                integers[first_param] = computer_options['input_values'].pop(0)
+            else:  
+                integers[first_param] = int(input("Enter integer: "))
             index += 2
         elif opcode == 4:
-            print(first_param)
+            if computer_options.get('use_return', False):
+                return first_param
+            else:
+                print(first_param)
             index += 2
         elif opcode in [5, 6]:
             # Check which mode to use: position or immediate
