@@ -45,14 +45,17 @@ import itertools
 from day5.part2 import run_computer
 
 
-def test_computer(input_sequence, phase_settings):
+def execute_sequence_with_settings(input_sequence, phase_settings):
+    max_signal = 0
     signal = 0
-
-    for phase in phase_settings:
+    for phase_setting in phase_settings:
         copy_sequence = input_sequence.copy()
-        signal = run_computer(copy_sequence, { 'use_return': True, 'input_values': [phase, signal] })
-    
-    return signal
+        computer = run_computer(copy_sequence)
+        next(computer)
+        computer.send(phase_setting)
+        signal = computer.send(signal)
+        max_signal = max(max_signal, signal)
+    return max_signal
 
 
 def main():
@@ -61,28 +64,25 @@ def main():
 
     # Run tests
     test_sequence = [3,15,3,16,1002,16,10,16,1,16,15,15,4,15,99,0,0]
-    if test_computer(test_sequence, [4,3,2,1,0]) != 43210:
+    if execute_sequence_with_settings(test_sequence, [4,3,2,1,0]) != 43210:
         print('test 1 failed')
         sys.exit(1)
     
     test_sequence = [3,23,3,24,1002,24,10,24,1002,23,-1,23,101,5,23,23,1,24,23,23,4,23,99,0,0]
-    if test_computer(test_sequence, [0,1,2,3,4]) != 54321:
+    if execute_sequence_with_settings(test_sequence, [0,1,2,3,4]) != 54321:
         print('test 2 failed')
         sys.exit(1)
     
     test_sequence = [3,31,3,32,1002,32,10,32,1001,31,-2,31,1007,31,0,33,1002,33,7,33,1,33,31,31,1,32,31,31,4,31,99,0,0,0]
-    if test_computer(test_sequence, [1,0,4,3,2]) != 65210:
+    if execute_sequence_with_settings(test_sequence, [1,0,4,3,2]) != 65210:
         print('test 3 failed')
         sys.exit(1)
 
     # Find out max signal from permutations
     max_signal = 0
     for phase_settings in list(itertools.permutations([0, 1, 2, 3, 4])):
-        signal = 0
-        for phase_setting in phase_settings:
-            copy_sequence = code_sequence.copy()
-            signal = run_computer(copy_sequence, { 'use_return': True, 'input_values': [phase_setting, signal] })
-            max_signal = max(max_signal, signal)
+        signal = execute_sequence_with_settings(code_sequence, phase_settings)
+        max_signal = max(max_signal, signal)
     
     print(max_signal)
 

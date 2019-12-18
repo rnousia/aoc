@@ -36,6 +36,7 @@ What is the diagnostic code for system ID 5?
 '''
 import os
 
+
 def parse_instructions(opcode):
     modes = [0, 0, 0]
     # Check if opcode has parameters
@@ -50,10 +51,14 @@ def parse_instructions(opcode):
         opcode = int(str(opcode)[-2:])
     return opcode, modes
 
-def run_computer(sequence, computer_options={}):
+
+def run_computer(sequence, interactive=False):
+
     integers = sequence.copy()
     index = 0
     opcode, modes = parse_instructions(integers[index])
+    value = None
+
     while opcode != 99:
         # Check which mode to use: position or immediate
         first_param = integers[integers[index+1]] if modes[0] == 0 and opcode != 3 else integers[index+1]
@@ -69,16 +74,17 @@ def run_computer(sequence, computer_options={}):
             index += 4
 
         elif opcode == 3:
-            if computer_options.get('input_values', None):
-                integers[first_param] = computer_options['input_values'].pop(0)
-            else:  
+            if interactive:  
                 integers[first_param] = int(input("Enter integer: "))
+            else:
+                value = yield
+                integers[first_param] = value
             index += 2
         elif opcode == 4:
-            if computer_options.get('use_return', False):
-                return first_param
-            else:
+            if interactive:  
                 print(first_param)
+            else:
+                yield first_param
             index += 2
         elif opcode in [5, 6]:
             # Check which mode to use: position or immediate
@@ -105,8 +111,6 @@ def run_computer(sequence, computer_options={}):
         
         # Get the next opcode
         opcode, modes = parse_instructions(integers[index])
-
-    return integers
 
 
 def main():
