@@ -127,5 +127,5 @@ def main():
 
     print(count_number_of_jumps(jumps_to_santa, jumps_to_you))
 
-if __name__== "__main__":
+if __name__== '__main__':
   main()

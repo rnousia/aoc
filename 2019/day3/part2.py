@@ -127,7 +127,7 @@ def main(panels, panel_size):
     print(min_distance)
 
 
-if __name__== "__main__":
+if __name__== '__main__':
     with open('{0}/input.txt'.format(os.path.dirname(os.path.realpath(__file__)))) as f:
         panels = f.read().splitlines()
 

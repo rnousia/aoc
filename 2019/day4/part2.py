@@ -34,6 +34,6 @@ def main():
     print(count_possible_passwords(171309, 643603))
 
 
-if __name__== "__main__":
+if __name__== '__main__':
     main()
 

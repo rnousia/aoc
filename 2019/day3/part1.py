@@ -112,5 +112,5 @@ def main():
     print(minimum_distance)
 
 
-if __name__== "__main__":
+if __name__== '__main__':
   main()

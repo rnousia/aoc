@@ -115,5 +115,5 @@ def main():
     print(count_orbits(orbits))
     
 
-if __name__== "__main__":
+if __name__== '__main__':
   main()
