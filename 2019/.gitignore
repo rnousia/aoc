@@ -1,3 +1,9 @@
 aoc2019.egg-info
 
 __pycache__
+
+# virtualenv
+venv
+
+# vscode configs
+.vscode
