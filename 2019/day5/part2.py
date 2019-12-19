@@ -112,6 +112,8 @@ def run_computer(sequence, interactive=False):
         # Get the next opcode
         opcode, modes = parse_instructions(integers[index])
 
+    yield integers
+
 
 def main():
     with open('{0}/input.txt'.format(os.path.dirname(os.path.realpath(__file__)))) as f:

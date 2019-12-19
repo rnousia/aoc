@@ -39,7 +39,6 @@ Max thruster signal 65210 (from phase setting sequence 1,0,4,3,2):
 Try every combination of phase settings on the amplifiers. What is the highest signal that can be sent to the thrusters?
 '''
 import os
-import sys
 import itertools
 
 from day5.part2 import run_computer
@@ -62,22 +61,6 @@ def main():
     with open('{0}/input.txt'.format(os.path.dirname(os.path.realpath(__file__)))) as f:
         code_sequence = [ int(code) for code in f.read().split(',')]
 
-    # Run tests
-    test_sequence = [3,15,3,16,1002,16,10,16,1,16,15,15,4,15,99,0,0]
-    if execute_sequence_with_settings(test_sequence, [4,3,2,1,0]) != 43210:
-        print('test 1 failed')
-        sys.exit(1)
-    
-    test_sequence = [3,23,3,24,1002,24,10,24,1002,23,-1,23,101,5,23,23,1,24,23,23,4,23,99,0,0]
-    if execute_sequence_with_settings(test_sequence, [0,1,2,3,4]) != 54321:
-        print('test 2 failed')
-        sys.exit(1)
-    
-    test_sequence = [3,31,3,32,1002,32,10,32,1001,31,-2,31,1007,31,0,33,1002,33,7,33,1,33,31,31,1,32,31,31,4,31,99,0,0,0]
-    if execute_sequence_with_settings(test_sequence, [1,0,4,3,2]) != 65210:
-        print('test 3 failed')
-        sys.exit(1)
-
     # Find out max signal from permutations
     max_signal = 0
     for phase_settings in list(itertools.permutations([0, 1, 2, 3, 4])):
@@ -85,8 +68,6 @@ def main():
         max_signal = max(max_signal, signal)
     
     print(max_signal)
-
-    
 
 
 if __name__== '__main__':
