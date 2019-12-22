@@ -36,23 +36,33 @@ Once your Intcode computer is fully functional, the BOOST program should report 
 import os
 import itertools
 
-from day5.part2 import run_computer
+from day5.part2 import Computer
 
 
 def run_program(input_sequence, input_value=None):
-    computer = run_computer(input_sequence)
-    signal = next(computer)
-    if input_value:
-      signal = computer.send(input_value)
-    return signal
+    output = []
+    computer = Computer(input_sequence.copy(), mem_size=2000).run()
+
+    for step in computer:
+        if not step:
+            output.append(computer.send(1))
+        else:
+            output.append(step)
+        if step:
+            print(step)
+    """ max_signal = max(max_signal, signal)
+    for result in run_computer(input_sequence, interactive=ask_for_input):
+        output.append(result)
+    print(output) """
+    return output if len(output) > 1 else output[0]
 
 
 def main():
     with open('{0}/input.txt'.format(os.path.dirname(os.path.realpath(__file__)))) as f:
         code_sequence = [ int(code) for code in f.read().split(',')]
 
-    signal = run_program(code_sequence, 1)
-    print(signal)
+    output = run_program(code_sequence, 1)
+    print(output)
 
   
 if __name__== '__main__':
