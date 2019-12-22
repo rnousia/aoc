@@ -41,18 +41,21 @@ Try every combination of phase settings on the amplifiers. What is the highest s
 import os
 import itertools
 
-from day5.part2 import run_computer
+from day5.part2 import Computer
 
 
 def execute_sequence_with_settings(input_sequence, phase_settings):
     max_signal = 0
     signal = 0
+    
     for phase_setting in phase_settings:
-        copy_sequence = input_sequence.copy()
-        computer = run_computer(copy_sequence)
-        next(computer)
-        computer.send(phase_setting)
-        signal = computer.send(signal)
+        computer = Computer(input_sequence.copy()).run()
+        for step in computer:
+            if not step:
+                computer.send(phase_setting)
+                signal = computer.send(signal)
+            else:
+                signal = step
         max_signal = max(max_signal, signal)
     return max_signal
 

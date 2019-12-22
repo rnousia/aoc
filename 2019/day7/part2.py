@@ -35,16 +35,15 @@ Try every combination of the new phase settings on the amplifier feedback loop. 
 import os
 import itertools
 
-from day5.part2 import run_computer
+from day5.part2 import Computer
 
 
 def execute_sequence_with_settings(input_sequence, phase_settings):
     amplifiers = []
-    copy_sequence = input_sequence.copy()
 
     for phase in phase_settings:
         # create generators
-        computer = run_computer(copy_sequence)
+        computer = Computer(input_sequence.copy()).run()
         next(computer)
         computer.send(phase)
         amplifiers.append(computer)

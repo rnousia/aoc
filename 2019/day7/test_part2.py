@@ -1,7 +1,7 @@
 import part2
 import unittest
  
-class TestRunProgram(unittest.TestCase):
+class TestDay7Part2(unittest.TestCase):
     """
     Test function execute_sequence_with_settings
     """
