@@ -1,10 +1,7 @@
 import part1
 import unittest
  
-class TestRunProgram(unittest.TestCase):
-    """
-    Test function execute_sequence_with_settings
-    """
+class TestDay9Part1(unittest.TestCase):
     
     def test_run_program(self):
         # Test case 1 should produce a copy of itself as output

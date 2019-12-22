@@ -45,15 +45,9 @@ def run_program(input_sequence, input_value=None):
 
     for step in computer:
         if not step:
-            output.append(computer.send(1))
+            output.append(computer.send(input_value))
         else:
             output.append(step)
-        if step:
-            print(step)
-    """ max_signal = max(max_signal, signal)
-    for result in run_computer(input_sequence, interactive=ask_for_input):
-        output.append(result)
-    print(output) """
     return output if len(output) > 1 else output[0]
 
 
