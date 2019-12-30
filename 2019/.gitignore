@@ -4,6 +4,3 @@ __pycache__
 
 # virtualenv
 venv
-
-# vscode configs
-.vscode
